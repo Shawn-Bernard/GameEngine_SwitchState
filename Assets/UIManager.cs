@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -39,5 +40,6 @@ public class UIManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+        EditorApplication.isPlaying = !EditorApplication.isPlaying;
     }
 }
