@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameStateManager : MonoBehaviour
 {
+    [SerializeField] private GameManager gameManager;
     public enum GameState
     {
         MainMenu_State, 
@@ -12,6 +14,7 @@ public class GameStateManager : MonoBehaviour
     }
     private GameState gameState;
 
+    private bool isPaused;
     private GameState currentState { get; set; }
 
     private GameState lastState { get; set; }
@@ -36,23 +39,31 @@ public class GameStateManager : MonoBehaviour
 
     public void HandleStateChange(GameState state)
     {
-        //Time.timeScale = 0; 
+         
         switch (state)
         {
             case GameState.MainMenu_State:
                 Debug.Log("Switch to menu");
-
+                gameManager.UImanager.EnableMainMenu();
+                Time.timeScale = 1;
+                isPaused = false;
                 // Logic for state here
 
                 break;
             case GameState.Gameplay_State:
                 Debug.Log("Switch to gameplay");
+                gameManager.UImanager.EnableGameplay();
+                Time.timeScale = 1;
+                isPaused = false;
 
                 // Logic for state here
 
                 break;
             case GameState.Paused_State:
                 Debug.Log("Switch to paused");
+                gameManager.UImanager.EnablePause();
+                Time.timeScale = 0;
+                isPaused = true;
 
                 // Logic for state here
                 break;
@@ -66,22 +77,40 @@ public class GameStateManager : MonoBehaviour
     void Start()
     {
         HandleStateChange(GameState.MainMenu_State);
+        //gameManager = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Alpha1))
+        
+        if (Input.GetKeyUp(KeyCode.Escape))
         {
-            ChangeState(GameState.MainMenu_State);
+            //If my game is paused then change the state to unpaused
+            if (isPaused)
+            {
+                ChangeState(GameState.Gameplay_State);
+            }
+            else
+            {
+                ChangeState(GameState.Paused_State);
+            }
         }
-        if (Input.GetKeyUp(KeyCode.Alpha2))
-        {
-            ChangeState(GameState.Gameplay_State);
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha3))
-        {
-            ChangeState(GameState.Paused_State);
-        }
+    }
+    public void MainMenu()
+    {
+        ChangeState(GameState.MainMenu_State);
+    }
+    public void Gameplay()
+    {
+        ChangeState(GameState.Gameplay_State);
+    }
+    public void Pause()
+    {
+        ChangeState(GameState.Paused_State);
+    }
+    public void Quit()
+    {
+        gameManager.UImanager.QuitGame();
     }
 }
