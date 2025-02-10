@@ -22,7 +22,7 @@ public class GameStateManager : MonoBehaviour
     [SerializeField] private string currentStateDebug;
     [SerializeField] private string lastStateDebug;
 
-
+    //This is where we will change game states 
     public void ChangeState(GameState newState)
     {
         // (Reading only) Holding my last game state, while converting to string
@@ -39,7 +39,7 @@ public class GameStateManager : MonoBehaviour
 
     public void HandleStateChange(GameState state)
     {
-         
+        //making a switch case for game states
         switch (state)
         {
             case GameState.MainMenu_State:
@@ -83,20 +83,26 @@ public class GameStateManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (Input.GetKeyUp(KeyCode.Escape))
+        //checking if were in the menu and if not, the player is allowed to pause
+        if (currentState != GameState.MainMenu_State)
         {
-            //If my game is paused then change the state to unpaused
-            if (isPaused)
+            if (Input.GetKeyUp(KeyCode.Escape))
             {
-                ChangeState(GameState.Gameplay_State);
-            }
-            else
-            {
-                ChangeState(GameState.Paused_State);
+                //If my game is paused then change the state to unpaused
+                if (isPaused)
+                {
+                    ChangeState(GameState.Gameplay_State);
+                }
+                //If the game isn't paused then pause
+                else
+                {
+                    ChangeState(GameState.Paused_State);
+                }
             }
         }
+        
     }
+    //Changing my game states so it could work with buttons
     public void MainMenu()
     {
         ChangeState(GameState.MainMenu_State);
@@ -109,6 +115,7 @@ public class GameStateManager : MonoBehaviour
     {
         ChangeState(GameState.Paused_State);
     }
+    //this method gets my UI manager script methods from game manager
     public void Quit()
     {
         gameManager.UImanager.QuitGame();

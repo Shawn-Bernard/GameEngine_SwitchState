@@ -426,7 +426,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &254173387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1324,7 +1324,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &776527403
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2354,7 +2354,7 @@ GameObject:
   - component: {fileID: 1194648420}
   - component: {fileID: 1194648419}
   m_Layer: 0
-  m_Name: MyObject
+  m_Name: Spinning_Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3113,7 +3113,6 @@ MonoBehaviour:
   mainMenu: {fileID: 776527402}
   gameplay: {fileID: 254173386}
   pause: {fileID: 75491769}
-  Quit: {fileID: 121407509}
 --- !u!1 &1749848039
 GameObject:
   m_ObjectHideFlags: 0
@@ -3621,8 +3620,8 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 195101822}
-  - {fileID: 1194648423}
   - {fileID: 75491773}
-  - {fileID: 1936477702}
   - {fileID: 776527403}
   - {fileID: 254173390}
+  - {fileID: 1936477702}
+  - {fileID: 1194648423}

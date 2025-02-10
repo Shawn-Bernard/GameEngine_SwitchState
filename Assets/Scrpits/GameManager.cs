@@ -5,13 +5,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     static GameManager Instance;
+    //Throwing in my UI manager script so I can have access to the methods
     public UIManager UImanager;
 
-    // Start is called before the first frame update
-    private void OnEnable()
-    {
-        UImanager = FindObjectOfType<UIManager>();
-    }
     void Start()
     {
         
