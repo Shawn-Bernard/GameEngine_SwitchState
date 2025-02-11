@@ -47,6 +47,7 @@ public class GameStateManager : MonoBehaviour
                 gameManager.UImanager.EnableMainMenu();
                 Time.timeScale = 1;
                 isPaused = false;
+                //Cursor.visible = true;
                 // Logic for state here
 
                 break;
@@ -55,6 +56,7 @@ public class GameStateManager : MonoBehaviour
                 gameManager.UImanager.EnableGameplay();
                 Time.timeScale = 1;
                 isPaused = false;
+                //Cursor.visible = false;
 
                 // Logic for state here
 
