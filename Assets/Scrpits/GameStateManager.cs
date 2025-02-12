@@ -14,7 +14,6 @@ public class GameStateManager : MonoBehaviour
     }
     private GameState gameState;
 
-    private bool isPaused;
     private GameState currentState { get; set; }
 
     private GameState lastState { get; set; }
@@ -46,7 +45,6 @@ public class GameStateManager : MonoBehaviour
                 Debug.Log("Switch to menu");
                 gameManager.UImanager.EnableMainMenu();
                 Time.timeScale = 1;
-                isPaused = false;
                 //Cursor.visible = true;
                 // Logic for state here
 
@@ -55,7 +53,6 @@ public class GameStateManager : MonoBehaviour
                 Debug.Log("Switch to gameplay");
                 gameManager.UImanager.EnableGameplay();
                 Time.timeScale = 1;
-                isPaused = false;
                 //Cursor.visible = false;
 
                 // Logic for state here
@@ -65,7 +62,6 @@ public class GameStateManager : MonoBehaviour
                 Debug.Log("Switch to paused");
                 gameManager.UImanager.EnablePause();
                 Time.timeScale = 0;
-                isPaused = true;
 
                 // Logic for state here
                 break;
@@ -90,15 +86,19 @@ public class GameStateManager : MonoBehaviour
         {
             if (Input.GetKeyUp(KeyCode.Escape))
             {
-                //If my game is paused then change the state to unpaused
-                if (isPaused)
+                //Making a switch case for the current state s
+                switch (currentState)
                 {
-                    ChangeState(GameState.Gameplay_State);
-                }
-                //If the game isn't paused then pause
-                else
-                {
-                    ChangeState(GameState.Paused_State);
+                    // If the current sate is paused state change to gameplay state
+                    case GameState.Paused_State:
+                        ChangeState(GameState.Gameplay_State);
+
+                        break;
+                    // If the current state is gameplay state change to pause menu
+                    case GameState.Gameplay_State:
+                        ChangeState(GameState.Paused_State);
+
+                        break;
                 }
             }
         }
